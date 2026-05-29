@@ -1,0 +1,64 @@
+schema = "animus.plugin.v1"
+name = "animus-subject-arxiv-papers"
+version = "0.1.0"
+plugin_kind = "subject_backend"
+description = "arXiv papers subject backend plugin for Animus"
+protocol = "stdio"
+
+[binary]
+default = "animus-subject-arxiv-papers"
+
+[capabilities]
+streaming = false
+progress = false
+cancellation = false
+methods = [
+  "subject/list",
+  "subject/get",
+  "subject/schema",
+  "arxiv.paper/list",
+  "arxiv.paper/get",
+  "arxiv.paper/schema",
+  "health/check",
+]
+subject_kinds = ["arxiv.paper"]
+
+[[env]]
+key = "ARXIV_SEARCH_QUERY"
+description = "Optional arXiv search query. Defaults to all:machine learning."
+required = false
+
+[[env]]
+key = "ARXIV_ID_LIST"
+description = "Optional comma-separated arXiv IDs to fetch or filter."
+required = false
+
+[[env]]
+key = "ARXIV_SORT_BY"
+description = "Optional sort field: relevance, lastUpdatedDate, or submittedDate. Defaults to submittedDate."
+required = false
+
+[[env]]
+key = "ARXIV_SORT_ORDER"
+description = "Optional sort order: ascending or descending. Defaults to descending."
+required = false
+
+[[env]]
+key = "ARXIV_API_URL"
+description = "Optional arXiv API base URL. Defaults to https://export.arxiv.org/api."
+required = false
+
+[[env]]
+key = "ARXIV_QUERY"
+description = "Optional local text query applied to papers after fetch."
+required = false
+
+[[env]]
+key = "ARXIV_START"
+description = "Optional zero-based result offset. Defaults to 0."
+required = false
+
+[[env]]
+key = "ARXIV_LIMIT"
+description = "Optional maximum paper count from 1 to 2000. Defaults to 50."
+required = false
